@@ -18,5 +18,5 @@ Host these files on your web server
 
 HOW TO PLAY
 Point a web browser to "game.php?acronym=XXXXX" where XXXXX is the letters you would like to play.
-Players make up a phrase that starts with the letters of the acronym, in order.  Correct entries will be displayed on the screen.
+Players make up a phrase that starts with the letters of the acronym, in order.  Players text the phrase to the Twilio number to be presented.  Correct entries will be displayed on the screen.
 Players then get to vote on which they judge to be the best.  Text the number on the right to increment that entry by 1 vote.
