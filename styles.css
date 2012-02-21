@@ -43,6 +43,8 @@ margin: 20px 0 0 0;
 
 .acronym-wrapper{
 	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .acronym{
 	display: inline-block;
@@ -54,6 +56,21 @@ margin: 20px 0 0 0;
 	padding: 25px;
 	border-radius: 30px;
 	-moz-border-radius: 30px;
+}
+
+.instructions-wrapper{
+	text-align: center;
+}
+.instructions{
+	display: inline-block;
+	color: black;
+	font-size: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #FAF2CF;
+	padding: 10px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 }
 
 .smsBox{

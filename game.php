@@ -34,8 +34,13 @@ while($phrase = mysql_fetch_assoc($res)){
 <body>
 	<div id="header-bar">Acro</div>
 	<div id="page-wrapper">
-		<div class="acronym-wrapper"><span align="center" class="acronym"><?php echo $acronym; ?></span></div>
-		<div class="table wrapper">
+		<div class="acronym-wrapper">
+			<span align="center" class="acronym"><?php echo $acronym; ?></span>
+		</div>
+		<div class="instructions-wrapper">
+			<span class="instructions">Text <?php echo $twilio_number; ?> a phrase that matches this acronym,<br>then text an ID number to vote for it!</span>
+		</div>
+		<div class="table-wrapper">
 			<table>
 				<thead class="grad"><tr><th>ID</th><th>Phrase</th><th>Votes</th></tr></thead>
 				<tbody id="phrases"><?php echo $phrases; ?></tbody>
