@@ -1,14 +1,13 @@
 <?php
 // Set up the database
-$con = mysql_connect("localhost","root","");
-mysql_select_db("acro", $con);
+include_once("constants.php");
 
 // Set up Twilio
 // Only incoming messages, doesn't require credentials
 
 // Set up Pubnub
 include_once('Pubnub.php');
-$pubnub = new Pubnub( 'publish key', 'subscription key' );
+$pubnub = new Pubnub( $pn_pubkey, $pn_subkey );
 
 
 // Get the useful parameters
@@ -40,7 +39,7 @@ else{
 $res = mysql_query("SELECT * FROM acro WHERE acronym='$acronym'");
 $phrases = "";
 while($phrase = mysql_fetch_assoc($res)){
-	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>($phrase[votes])</td></tr>";
+	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>$phrase[votes]</td></tr>";
 }
 $pubnub->publish(array(
     'channel' => "$acronym",

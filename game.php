@@ -1,7 +1,6 @@
 <?php
 // Connect to the database
-$con = mysql_connect("localhost","root","");
-mysql_select_db("acro", $con);
+include_once("constants.php");
 
 // Load the initial data from the database
 if(isset($_GET['acronym'])){
@@ -23,7 +22,7 @@ $res = mysql_query("SELECT * FROM acro WHERE acronym = '$acronym'");
 // Prepare the html for the list item
 $phrases = "";
 while($phrase = mysql_fetch_assoc($res)){
-	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>($phrase[votes])</td></tr>";
+	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>$phrase[votes]</td></tr>";
 }
 
 ?><html>
@@ -44,7 +43,7 @@ while($phrase = mysql_fetch_assoc($res)){
 		</div>
 		<button onClick="var loc = window.location.href; window.location = loc.split('?')[0];">New phrase</button>
 	</div>
-<div pub-key="public key" sub-key="subscription key" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+<div pub-key="<?php echo $pn_pubkey; ?>" sub-key="<?php echo $pn_subkey; ?>" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
 <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
 <script>(function(){
     // LISTEN FOR MESSAGES
