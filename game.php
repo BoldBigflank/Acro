@@ -25,6 +25,14 @@ while($phrase = mysql_fetch_assoc($res)){
 	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>$phrase[votes]</td></tr>";
 }
 
+// Get previous rounds
+$res = mysql_query("SELECT acronym FROM acro GROUP BY acronym");
+$$previousAcronyms = "";
+while($a = mysql_fetch_assoc($res)){
+	$previousAcronyms .= "<a href='game.php?acronym=$a[acronym]'>$a[acronym]</a> ";
+}
+
+
 ?><html>
 <head>
 	<title>Acro</title>
@@ -47,6 +55,9 @@ while($phrase = mysql_fetch_assoc($res)){
 			</table>
 		</div>
 		<button onClick="var loc = window.location.href; window.location = loc.split('?')[0];">New phrase</button>
+		<div class="previousAcronyms-wrapper">
+			<div class="previousAcronyms"><?php echo $previousAcronyms; ?></div>
+		</div>
 	</div>
 	<div class="smsBox">
 		<span id="smsTitle">SMS Simulator</span><br>
