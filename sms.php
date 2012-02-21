@@ -16,6 +16,7 @@ $From = $_GET['From'];
 
 // If body is a number
 if(is_numeric($Body)){
+	$action = "vote";
 	// increment the database
 	mysql_query("UPDATE acro SET votes = votes + 1 WHERE id='$Body'");
 	
@@ -26,6 +27,7 @@ if(is_numeric($Body)){
 }
 // else it's a string
 else{
+	$action = "entry";
 	// Make the acronym
 	$acronym = "";
 	foreach (explode(" ", $Body) as $word)
@@ -48,6 +50,6 @@ $pubnub->publish(array(
 
 
 // Respond to the user
-echo "<Response><Sms>Your entry for the acronym $acronym has been received.</Sms></Response>";
+echo "<Response><Sms>Your $action for the acronym $acronym has been received.</Sms></Response>";
 
 ?>
