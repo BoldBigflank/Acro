@@ -30,7 +30,7 @@ else{
 	// Make the acronym
 	$acronym = "";
 	foreach (explode(" ", $Body) as $word)
-		$acronym .= strtolower($word[0]);
+		$acronym .= strtoupper($word[0]);
 	
 	// add body to the database as an entry
 	mysql_query("INSERT INTO acro SET acronym='$acronym', body='$Body', acro.from='$From'");
@@ -40,7 +40,7 @@ else{
 $res = mysql_query("SELECT * FROM acro WHERE acronym='$acronym'");
 $phrases = "";
 while($phrase = mysql_fetch_assoc($res)){
-	$phrases .= "<li>$phrase[id] - $phrase[body] ($phrase[votes])</li>";
+	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>($phrase[votes])</td></tr>";
 }
 $pubnub->publish(array(
     'channel' => "$acronym",
