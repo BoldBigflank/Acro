@@ -11,7 +11,7 @@ else{// If there is no acronym, create one
 	$size = rand(3, 7);
 	$acronym = "";
 	$abc= array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); 
-	for($i = 1; $i < $size; $i++){
+	for($i = 1; $i <= $size; $i++){
 		$acronym .= strtoupper($abc[rand(0,25)]);
 	}
 }
@@ -43,17 +43,38 @@ while($phrase = mysql_fetch_assoc($res)){
 		</div>
 		<button onClick="var loc = window.location.href; window.location = loc.split('?')[0];">New phrase</button>
 	</div>
-<div pub-key="<?php echo $pn_pubkey; ?>" sub-key="<?php echo $pn_subkey; ?>" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
-<script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
-<script>(function(){
-    // LISTEN FOR MESSAGES
-    PUBNUB.subscribe({
-    channel  : "<?php echo $acronym; ?>",
-    callback : function(message) { 
-		$("#phrases").html(message.phrases)
+	<div class="smsBox">
+		<span id="smsTitle">SMS Simulator</span><br>
+		<input id="smsBody" type="text" /><br>
+		<button id="smsSubmit" onClick="sendSMS()">Send SMS</button><br>
+		<span id="smsResponse"></span>
+	</div>
+	<script>
+	function sendSMS(){
+		var Body = $("#smsBody").val();
+		var From = "web";
+		$.ajax({
+		  url: "sms.php?From=" + From + "&Body=" + encodeURIComponent(Body),
+		  context: document.body,
+		  success: function(data){
+			  console.log(data);
+			  $("#smsBody").val("")
+			  $("#smsResponse").html(data)
+		  }
+		});
 	}
-})
+	</script>
+	<div pub-key="<?php echo $pn_pubkey; ?>" sub-key="<?php echo $pn_subkey; ?>" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+	<script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
+	<script>(function(){
+	    // LISTEN FOR MESSAGES
+	    PUBNUB.subscribe({
+	    channel  : "<?php echo $acronym; ?>",
+	    callback : function(message) { 
+			$("#phrases").html(message.phrases)
+		}
+	})
  
-})();</script>
+	})();</script>
 </body>
 </html>
