@@ -1,0 +1,22 @@
+SETUP
+MySQL:
+You need to create a mysql database named "acro", and import the file acro.sql into it
+
+PubNub:
+Change the following lines to your PubNub keys:
+game.php:
+<div pub-key="public key" sub-key="subscription key" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+
+sms.php:
+$pubnub = new Pubnub( 'publish key', 'subscription key' );
+
+Twilio:
+Purchase a number, direct the SMS to GET sms.php
+
+Host these files on your web server
+
+
+HOW TO PLAY
+Point a web browser to "game.php?acronym=XXXXX" where XXXXX is the letters you would like to play.
+Players make up a phrase that starts with the letters of the acronym, in order.  Correct entries will be displayed on the screen.
+Players then get to vote on which they judge to be the best.  Text the number on the right to increment that entry by 1 vote.
