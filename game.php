@@ -46,7 +46,7 @@ while($a = mysql_fetch_assoc($res)){
 			<span align="center" class="acronym"><?php echo $acronym; ?></span>
 		</div>
 		<div class="instructions-wrapper">
-			<span class="instructions">Text <?php echo $twilio_number; ?> a phrase that matches this acronym,<br>then text an ID number to vote for it!</span>
+			<span class="instructions">Text <?php echo $twilio_number; ?> a phrase that matches this acronym,<br>then text an ID number below to vote for it!</span>
 		</div>
 		<div class="table-wrapper">
 			<table>
