@@ -1,8 +1,10 @@
 <?php
 // PubNub info (change this to your account keys)
-$pn_subkey = "subscribe_key"; // PubNub subscription key
-$pn_pubkey = "publish_key"; // PubNub publish key
+$pn_subkey = "sub-key"; // PubNub subscription key
+$pn_pubkey = "pub-key"; // PubNub publish key
 
+// Twilio number
+$twilio_number = "XXX-XXX-XXXX"; // This will be shown on the game page to instruct players
 
 // Database info (may not need to be changed)
 $db_host = "localhost"; // Database host
