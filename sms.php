@@ -48,6 +48,6 @@ $pubnub->publish(array(
 
 
 // Respond to the user
-echo "<Response><Sms>You did it!</Sms></Response>";
+echo "<Response><Sms>Your entry for the acronym $acronym has been received.</Sms></Response>";
 
 ?>
