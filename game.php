@@ -4,10 +4,18 @@ $con = mysql_connect("localhost","root","");
 mysql_select_db("acro", $con);
 
 // Load the initial data from the database
-$acronym = isset($_GET['acronym']) ? strtoupper($_GET['acronym']) : "TEST";
-
-// If there is no acronym, create one
-
+if(isset($_GET['acronym'])){
+	$acronym = strtoupper($_GET['acronym']);
+}
+else{// If there is no acronym, create one
+	// 3 - 7 characters
+	$size = rand(3, 7);
+	$acronym = "";
+	$abc= array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); 
+	for($i = 1; $i < $size; $i++){
+		$acronym .= strtoupper($abc[rand(0,25)]);
+	}
+}
 
 // Get phrases for that acronym
 $res = mysql_query("SELECT * FROM acro WHERE acronym = '$acronym'");
