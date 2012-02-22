@@ -38,6 +38,14 @@ if($twilio_number != "XXX-XXX-XXXX")
 else
 	$instructions = "Use the SMS Simulator to send a phrase that matches this acronym,<br>then send the ID number of the best one to vote for it!";
 
+// include_once('Pubnub.php');
+// $pubnub = new Pubnub( $pn_pubkey, $pn_subkey );
+// print_r( $pubnub->history(array(
+// 	"channel"=>"$acronym",
+// 	"limit"=>1
+// )));
+
+
 ?><html>
 <head>
 	<title>Acro</title>
@@ -45,7 +53,7 @@ else
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<div id="header-bar">Acro</div>
+	<div id="header-bar">Acro (<a href="https://github.com/smashcubed/Acro">GitHub</a>)</div>
 	<div id="page-wrapper">
 		<div class="acronym-wrapper">
 			<span align="center" class="acronym"><?php echo $acronym; ?></span>
@@ -73,7 +81,7 @@ else
 	<script>
 	function sendSMS(){
 		var Body = $("#smsBody").val();
-		var From = "web";
+		var From = "web" + Math.floor(Math.random()*100);
 		$.ajax({
 		  url: "sms.php?From=" + From + "&Body=" + encodeURIComponent(Body),
 		  context: document.body,
@@ -84,18 +92,35 @@ else
 		  }
 		});
 	}
+	function getParameterByName(name) {
+		var match = RegExp('[?&]' + name + '=([^&]*)')
+                    .exec(window.location.search);
+    	return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+	}
+
 	</script>
 	<div pub-key="<?php echo $pn_pubkey; ?>" sub-key="<?php echo $pn_subkey; ?>" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
 	<script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
 	<script>(function(){
+
+		var acronym = "<?php echo $acronym; ?>";
+		// Update phrases from the most recent message from the history
+		// PUBNUB.history({
+		// 	channel: acronym,
+		// 	limit: 1
+		// }, function(messages){
+		// 	console.log(messages)
+		// 	if(messages[0])
+		// 		$("#phrases").html(messages[0].phrases)
+		// })
+
 	    // LISTEN FOR MESSAGES
 	    PUBNUB.subscribe({
-	    channel  : "<?php echo $acronym; ?>",
-	    callback : function(message) { 
-			$("#phrases").html(message.phrases)
-		}
-	})
- 
+		    channel  : acronym,
+		    callback : function(message) { 
+				$("#phrases").html(message.phrases)
+			}
+		})
 	})();</script>
 </body>
 </html>
