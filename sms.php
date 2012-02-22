@@ -21,7 +21,7 @@ if(strlen($Body)==0) return;
 if(is_numeric($Body)){
 	$action = "vote";
 	// increment the database (if they aren't voting for themself)
-	mysql_query("UPDATE acro SET votes = votes + 1 WHERE id='$Body' AND from != '$From'");
+	mysql_query("UPDATE acro SET votes = votes + 1 WHERE id='$Body' AND acro.from != '$From'");
 	
 	// Get the acronym
 	$res = mysql_query("SELECT acronym FROM acro WHERE id='$Body'");

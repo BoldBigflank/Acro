@@ -27,7 +27,7 @@ while($phrase = mysql_fetch_assoc($res)){
 
 // Get previous rounds
 $res = mysql_query("SELECT acronym FROM acro GROUP BY acronym");
-$$previousAcronyms = "";
+$previousAcronyms = "";
 while($a = mysql_fetch_assoc($res)){
 	$previousAcronyms .= "<a href='game.php?acronym=$a[acronym]'>$a[acronym]</a> ";
 }
