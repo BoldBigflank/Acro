@@ -14,11 +14,14 @@ $pubnub = new Pubnub( $pn_pubkey, $pn_subkey );
 $Body = $_GET['Body'];
 $From = $_GET['From'];
 
+// If empty body
+if(strlen($Body)==0) return;
+
 // If body is a number
 if(is_numeric($Body)){
 	$action = "vote";
-	// increment the database
-	mysql_query("UPDATE acro SET votes = votes + 1 WHERE id='$Body'");
+	// increment the database (if they aren't voting for themself)
+	mysql_query("UPDATE acro SET votes = votes + 1 WHERE id='$Body' AND from != '$From'");
 	
 	// Get the acronym
 	$res = mysql_query("SELECT acronym FROM acro WHERE id='$Body'");
@@ -43,6 +46,7 @@ $phrases = "";
 while($phrase = mysql_fetch_assoc($res)){
 	$phrases .= "<tr><td>$phrase[id]</td><td>$phrase[body]</td><td>$phrase[votes]</td></tr>";
 }
+
 $pubnub->publish(array(
     'channel' => "$acronym",
     'message' => array( 'phrases' => $phrases )
