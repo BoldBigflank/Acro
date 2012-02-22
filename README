@@ -11,6 +11,6 @@ Twilio:
 Purchase a number, point the SMS to GET sms.php
 
 HOW TO PLAY
-Point a web browser to "game.php?acronym=XXXXX" where XXXXX is the letters you would like to play.  If you omit the acronym parameter, a 3-7 letter acronym will be generated for you.
-Players make up a phrase that starts with the letters of the acronym, in order.  Players text the phrase to the Twilio number to be presented.  Correct entries will be displayed on the screen.
-Players then get to vote on which they judge to be the best.  Text the number on the right to increment that entry by 1 vote.
+Point a web browser to game.php.  A 3-7 letter acronym will be generated for you.
+Players make up a phrase that starts with the letters of the acronym, in order.  Players text the phrase to the Twilio number to be presented.  Matching entries will be displayed on the screen.
+Players then get to vote on which they judge to be the best.  Text the ID number on the left to increment that entry by 1 vote.

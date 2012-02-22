@@ -32,6 +32,11 @@ while($a = mysql_fetch_assoc($res)){
 	$previousAcronyms .= "<a href='game.php?acronym=$a[acronym]'>$a[acronym]</a> ";
 }
 
+// Prepare the instructions
+if($twilio_number != "XXX-XXX-XXXX")
+	$instructions = "Text $twilio_number a phrase that matches this acronym,<br>then text the ID number of the best one to vote for it!";
+else
+	$instructions = "Use the SMS Simulator to send a phrase that matches this acronym,<br>then send the ID number of the best one to vote for it!";
 
 ?><html>
 <head>
@@ -46,7 +51,7 @@ while($a = mysql_fetch_assoc($res)){
 			<span align="center" class="acronym"><?php echo $acronym; ?></span>
 		</div>
 		<div class="instructions-wrapper">
-			<span class="instructions">Text <?php echo $twilio_number; ?> a phrase that matches this acronym,<br>then text the ID number of the best one to vote for it!</span>
+			<span class="instructions"><?php echo $instructions; ?></span>
 		</div>
 		<div class="table-wrapper">
 			<table>
